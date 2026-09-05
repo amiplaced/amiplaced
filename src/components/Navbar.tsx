@@ -26,12 +26,11 @@ export default function Navbar() {
       >
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-9 h-9 rounded-full bg-[#7B2FF7] text-white neo-border flex items-center justify-center font-heading font-extrabold text-lg shadow-[2px_2px_0px_#000] group-hover:scale-105 transition-transform">
-            A
-          </div>
-          <span className="font-heading font-extrabold text-xl md:text-2xl tracking-tight text-[#0A0A0A]">
-            AmiPlaced
-          </span>
+          <img
+            src="/AmiPlaced_Logo.svg"
+            alt="AmiPlaced"
+            className="h-9 md:h-10 w-auto object-contain group-hover:scale-105 transition-transform"
+          />
         </Link>
 
         {/* Desktop Nav Links */}

@@ -11,9 +11,11 @@ export default function Footer() {
         <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 pb-16">
           {/* Left Column: Brand & Socials */}
           <div className="md:col-span-6 flex flex-col items-start">
-            <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-white tracking-tight mb-3">
-              AmiPlaced
-            </h2>
+            <img
+              src="/AmiPlaced_Logo.svg"
+              alt="AmiPlaced"
+              className="h-10 sm:h-12 w-auto object-contain mb-4 filter brightness-0 invert"
+            />
             <p className="text-sm sm:text-base text-neutral-400 font-medium max-w-sm mb-6 leading-relaxed">
               Made for students tired of sending <br />
               <span className="font-mono text-neutral-300">Resume_Final_Final.pdf.</span>
