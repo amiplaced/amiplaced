@@ -6,16 +6,20 @@ export async function POST(request: Request) {
     const googleScriptUrl = process.env.GOOGLE_SCRIPT_URL;
 
     if (googleScriptUrl) {
-      // Async background dispatch to Google Apps Script (non-blocking for zero latency)
-      fetch(googleScriptUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      }).catch((err) => console.error("Google Script Sync Error:", err));
+      try {
+        await fetch(googleScriptUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+          redirect: "follow",
+        });
+      } catch (err) {
+        console.error("Google Script Sync Error:", err);
+      }
     } else {
-      console.warn("GOOGLE_SCRIPT_URL is not configured in .env.local");
+      console.warn("GOOGLE_SCRIPT_URL is not configured in environment variables");
     }
 
     return NextResponse.json({
