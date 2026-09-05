@@ -15,9 +15,59 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "AmiPlaced — Built For Indian Students",
+  metadataBase: new URL("https://www.amiplaced.com"),
+  title: "AmiPlaced Built For Indian Students",
   description:
     "Stop sending the same resume everywhere. Get job-specific resumes, recruiter-ready LinkedIn profiles, and actual application assistance.",
+  keywords: [
+    "AmiPlaced",
+    "Resume Builder for Indian Students",
+    "Targeted Resumes",
+    "ATS Friendly Resume",
+    "LinkedIn Profile Optimization",
+    "Job Application Assistance",
+    "Fresher Resumes India",
+    "Student Placement Resume",
+  ],
+  authors: [{ name: "AmiPlaced", url: "https://www.amiplaced.com" }],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "AmiPlaced Built For Indian Students",
+    description:
+      "Stop sending the same resume everywhere. Get job-specific resumes, recruiter-ready LinkedIn profiles, and actual application assistance.",
+    url: "https://www.amiplaced.com",
+    siteName: "AmiPlaced",
+    images: [
+      {
+        url: "/android-chrome-512x512.png",
+        width: 512,
+        height: 512,
+        alt: "AmiPlaced Logo",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AmiPlaced Built For Indian Students",
+    description:
+      "Stop sending the same resume everywhere. Get job-specific resumes, recruiter-ready LinkedIn profiles, and actual application assistance.",
+    images: ["/android-chrome-512x512.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -39,6 +89,21 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${plusJakartaSans.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "AmiPlaced",
+              "url": "https://www.amiplaced.com",
+              "description":
+                "Stop sending the same resume everywhere. Get job-specific resumes, recruiter-ready LinkedIn profiles, and actual application assistance.",
+            }),
+          }}
+        />
+      </head>
       <body className="min-h-full bg-[#F4F3ED] text-[#0A0A0A] selection:bg-[#D7FF3F] selection:text-black font-sans">
         {children}
       </body>
