@@ -50,7 +50,7 @@ export default function Footer() {
 
               {/* WhatsApp Badge */}
               <a
-                href="https://wa.me/919999999999?text=Hi%20AmiPlaced"
+                href="https://wa.me/919958484106?text=Hi%20AmiPlaced"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="neo-border-sm bg-[#D7FF3F] text-black font-heading font-extrabold text-xs px-4 py-2.5 rounded-xl hover:scale-105 transition-transform flex items-center gap-1.5"

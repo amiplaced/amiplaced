@@ -141,7 +141,7 @@ function CheckoutContent() {
               </div>
 
               <a
-                href={`https://wa.me/919999999999?text=Hi%20AmiPlaced!%20I've%20just%20placed%20an%20order%20for%20${encodeURIComponent(
+                href={`https://wa.me/919958484106?text=Hi%20AmiPlaced!%20I've%20just%20placed%20an%20order%20for%20${encodeURIComponent(
                   selectedServices.map((s) => s.name).join(" + ")
                 )}%20(Name:%20${encodeURIComponent(formData.fullName)},%20Phone:%20${encodeURIComponent(formData.phone)})`}
                 target="_blank"
