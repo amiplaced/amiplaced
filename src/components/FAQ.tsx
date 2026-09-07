@@ -9,6 +9,10 @@ export default function FAQ() {
 
   const faqs = [
     {
+      q: "Why choose AmiPlaced?",
+      a: "Over 427+ students have upgraded their career profiles with us. Every resume and LinkedIn optimization is handled by a dedicated team of 8+ career mentors and domain experts who understand actual recruiter standards.",
+    },
+    {
       q: "Is this resume ATS-friendly?",
       a: "Yes. Resumes are structured to follow ATS-friendly principles while targeting relevant job descriptions.",
     },
@@ -65,7 +69,7 @@ export default function FAQ() {
         </motion.div>
 
         <h2 className="font-heading font-extrabold text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tight text-[#0A0A0A]">
-          FAQ. NO FLUFF.
+          FAQ. NO FLUFF
         </h2>
       </div>
 

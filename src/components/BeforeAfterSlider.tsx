@@ -87,7 +87,7 @@ export default function BeforeAfterSlider() {
         </motion.div>
 
         <h2 className="font-heading font-extrabold text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tight text-[#0A0A0A]">
-          BEFORE. AFTER. NO CAP.
+          BEFORE. AFTER. NO CAP
         </h2>
       </div>
 

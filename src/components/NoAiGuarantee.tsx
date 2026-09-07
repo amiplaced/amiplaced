@@ -68,7 +68,7 @@ export default function NoAiGuarantee() {
             NO AI GENERATED CONTENT &amp; ZERO PLAGIARISM
           </span>
           <span className="relative inline-block text-[#7B2FF7] sm:whitespace-nowrap">
-            THROUGHOUT YOUR ENTIRE RESUME.
+            THROUGHOUT YOUR ENTIRE RESUME
             <span className="absolute left-0 bottom-1 w-full h-3 bg-[#D7FF3F] -z-10 transform -rotate-1"></span>
           </span>
         </h2>

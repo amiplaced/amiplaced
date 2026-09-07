@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ArrowLeft, ShieldCheck, Sparkles, CheckCircle2 } from "lucide-react";
+import { Check, ArrowLeft, ShieldCheck, Sparkles, CheckCircle2, Tag } from "lucide-react";
 import Link from "next/link";
+import { calculateStackPricing } from "@/utils/pricing";
 
 interface ServiceOption {
   id: string;
@@ -20,14 +21,30 @@ const ALL_SERVICES: ServiceOption[] = [
 
 function CheckoutContent() {
   const searchParams = useSearchParams();
-  const initialPlan = searchParams.get("plan") || "linkedin";
+  const initialPlan = searchParams.get("plan");
   const initialItems = searchParams.get("items");
 
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const paramName = searchParams.get("name");
+  const paramEmail = searchParams.get("email");
+  const paramPhone = searchParams.get("phone");
+
+  // Parse initial services from URL params
+  const getInitialServices = () => {
+    if (initialItems) {
+      const itemsArr = initialItems.split(",").filter((id) => ALL_SERVICES.some((s) => s.id === id));
+      if (itemsArr.length > 0) return itemsArr;
+    }
+    if (initialPlan && ALL_SERVICES.some((s) => s.id === initialPlan)) {
+      return [initialPlan];
+    }
+    return ["linkedin"];
+  };
+
+  const [selectedIds, setSelectedIds] = useState<string[]>(getInitialServices);
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
+    fullName: paramName || "",
+    email: paramEmail || "",
+    phone: paramPhone || "",
     college: "",
     course: "",
     gradYear: "",
@@ -35,21 +52,28 @@ function CheckoutContent() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    if (initialItems) {
-      const itemsArr = initialItems.split(",").filter((id) => ALL_SERVICES.some((s) => s.id === id));
-      if (itemsArr.length > 0) {
-        setSelectedIds(itemsArr);
-        return;
-      }
-    }
+  const isMountedRef = useRef(false);
 
-    if (initialPlan && ALL_SERVICES.some((s) => s.id === initialPlan)) {
-      setSelectedIds([initialPlan]);
-    } else {
-      setSelectedIds(["linkedin"]);
+  // Sync state on initial mount if searchParams were delayed during hydration
+  useEffect(() => {
+    if (!isMountedRef.current) {
+      isMountedRef.current = true;
+      const initial = getInitialServices();
+      setSelectedIds(initial);
     }
-  }, [initialPlan, initialItems]);
+  }, [initialItems, initialPlan]);
+
+  // Sync lead form prefilled fields from query params
+  useEffect(() => {
+    if (paramName || paramEmail || paramPhone) {
+      setFormData((prev) => ({
+        ...prev,
+        fullName: paramName || prev.fullName,
+        email: paramEmail || prev.email,
+        phone: paramPhone || prev.phone,
+      }));
+    }
+  }, [paramName, paramEmail, paramPhone]);
 
   const toggleService = (id: string) => {
     if (selectedIds.includes(id)) {
@@ -61,11 +85,10 @@ function CheckoutContent() {
   };
 
   const selectedServices = ALL_SERVICES.filter((s) => selectedIds.includes(s.id));
-  const totalPrice = selectedServices.reduce((acc, curr) => acc + curr.price, 0);
+  const pricing = calculateStackPricing(selectedIds);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Instant UI transition to success screen (0ms latency)
     setIsSubmitted(true);
 
     try {
@@ -77,7 +100,9 @@ function CheckoutContent() {
         course: formData.course,
         gradYear: formData.gradYear,
         selectedServices: selectedServices.map((s) => s.name).join(" + "),
-        totalPrice: totalPrice,
+        originalPrice: pricing.originalPrice,
+        discountAmount: pricing.discountAmount,
+        totalPrice: pricing.finalPrice,
       };
 
       fetch("/api/checkout", {
@@ -122,13 +147,23 @@ function CheckoutContent() {
               </h2>
 
               <p className="text-neutral-600 font-medium text-base sm:text-lg mb-8 max-w-md">
-                Thank you <strong className="text-black">{formData.fullName || "Student"}</strong>! We have locked in your selected package (<strong className="text-[#7B2FF7]">₹{totalPrice.toLocaleString("en-IN")}</strong>).
+                Thank you <strong className="text-black">{formData.fullName || "Student"}</strong>! We have locked in your selected package (<strong className="text-[#7B2FF7]">₹{pricing.finalPrice.toLocaleString("en-IN")}</strong>{pricing.hasDiscount ? ` — Saved ₹${pricing.discountAmount.toLocaleString("en-IN")}` : ""}).
               </p>
 
               <div className="bg-neutral-50 neo-border-sm rounded-2xl p-6 w-full text-left mb-8 space-y-2 text-sm">
                 <div className="flex justify-between font-mono">
                   <span className="text-neutral-500">Package:</span>
                   <span className="font-bold">{selectedServices.map((s) => s.name).join(" + ")}</span>
+                </div>
+                {pricing.hasDiscount && (
+                  <div className="flex justify-between font-mono text-[#7B2FF7]">
+                    <span>Bundle Savings:</span>
+                    <span className="font-bold">Saved ₹{pricing.discountAmount.toLocaleString("en-IN")}</span>
+                  </div>
+                )}
+                <div className="flex justify-between font-mono">
+                  <span className="text-neutral-500">Total Price:</span>
+                  <span className="font-bold">₹{pricing.finalPrice.toLocaleString("en-IN")}</span>
                 </div>
                 <div className="flex justify-between font-mono">
                   <span className="text-neutral-500">WhatsApp / Phone:</span>
@@ -143,7 +178,7 @@ function CheckoutContent() {
               <a
                 href={`https://wa.me/919958484106?text=Hi%20AmiPlaced!%20I've%20just%20placed%20an%20order%20for%20${encodeURIComponent(
                   selectedServices.map((s) => s.name).join(" + ")
-                )}%20(Name:%20${encodeURIComponent(formData.fullName)},%20Phone:%20${encodeURIComponent(formData.phone)})`}
+                )}%20for%20Rs.${pricing.finalPrice}%20(Name:%20${encodeURIComponent(formData.fullName)},%20Phone:%20${encodeURIComponent(formData.phone)})`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-[#D7FF3F] text-black border-3 border-black neo-border rounded-2xl py-4 px-8 font-heading font-extrabold text-lg uppercase tracking-wider shadow-[5px_5px_0px_#000] hover:shadow-[8px_8px_0px_#000] hover:-translate-x-1 hover:-translate-y-1 transition-all w-full flex items-center justify-center gap-2"
@@ -173,7 +208,7 @@ function CheckoutContent() {
                 </motion.div>
 
                 <h1 className="font-heading font-extrabold text-4xl sm:text-6xl uppercase tracking-tight text-[#0A0A0A] mb-2">
-                  Almost there.
+                  Almost there
                 </h1>
                 <p className="text-base sm:text-lg text-neutral-600 font-medium mb-8">
                   Fill the basics. Payment is instant.
@@ -251,9 +286,17 @@ function CheckoutContent() {
 
                   {/* Service Package Selection Checkboxes */}
                   <div className="pt-4">
-                    <span className="font-heading font-black text-xs uppercase tracking-widest text-neutral-500 block mb-3">
-                      SELECT SERVICES
-                    </span>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-heading font-black text-xs uppercase tracking-widest text-neutral-500">
+                        SELECT SERVICES
+                      </span>
+                      {pricing.hasDiscount && (
+                        <span className="text-xs font-heading font-black text-[#7B2FF7] inline-flex items-center gap-1">
+                          <Tag className="w-3.5 h-3.5" />
+                          Save ₹{pricing.discountAmount.toLocaleString("en-IN")}
+                        </span>
+                      )}
+                    </div>
                     <div className="space-y-3">
                       {ALL_SERVICES.map((service) => {
                         const isSelected = selectedIds.includes(service.id);
@@ -298,7 +341,7 @@ function CheckoutContent() {
                       {isSubmitting ? (
                         <span>Processing...</span>
                       ) : (
-                        <span>Proceed to Payment · ₹{totalPrice.toLocaleString("en-IN")}</span>
+                        <span>Proceed to Payment · ₹{pricing.finalPrice.toLocaleString("en-IN")}</span>
                       )}
                     </button>
                   </div>
@@ -309,9 +352,16 @@ function CheckoutContent() {
               <div className="lg:col-span-5 sticky top-12">
                 <div className="bg-white neo-border neo-shadow-lg rounded-3xl p-7 sm:p-8 flex flex-col justify-between min-h-[320px]">
                   <div>
-                    <span className="font-heading font-black text-xs uppercase tracking-widest text-[#7B2FF7] block mb-6">
-                      YOUR ORDER
-                    </span>
+                    <div className="flex items-center justify-between mb-6">
+                      <span className="font-heading font-black text-xs uppercase tracking-widest text-[#7B2FF7]">
+                        YOUR ORDER
+                      </span>
+                      {pricing.hasDiscount && (
+                        <span className="neo-sticker bg-[#D7FF3F] text-black text-[10px] font-black uppercase px-2 py-0.5">
+                          BUNDLE SAVINGS
+                        </span>
+                      )}
+                    </div>
 
                     <div className="space-y-4 mb-6 pb-6 border-b-2 border-black">
                       {selectedServices.map((service) => (
@@ -326,12 +376,33 @@ function CheckoutContent() {
                       ))}
                     </div>
 
+                    {/* Subtotal and Discount Breakdown if Bundle */}
+                    {pricing.hasDiscount && (
+                      <div className="space-y-2 mb-4 pb-4 border-b border-black/10 text-sm font-semibold">
+                        <div className="flex items-center justify-between text-neutral-500 font-mono">
+                          <span>Original Subtotal:</span>
+                          <span className="line-through">₹{pricing.originalPrice.toLocaleString("en-IN")}</span>
+                        </div>
+                        <div className="flex items-center justify-between text-[#7B2FF7] font-heading font-bold">
+                          <span>Bundle Discount:</span>
+                          <span>-₹{pricing.discountAmount.toLocaleString("en-IN")}</span>
+                        </div>
+                      </div>
+                    )}
+
                     <div className="flex items-baseline justify-between mb-6">
-                      <span className="font-heading font-black text-xs uppercase tracking-widest text-neutral-500">
-                        TOTAL
-                      </span>
+                      <div>
+                        <span className="font-heading font-black text-xs uppercase tracking-widest text-neutral-500 block">
+                          TOTAL
+                        </span>
+                        {pricing.hasDiscount && (
+                          <span className="text-xs font-bold text-[#7B2FF7]">
+                            Saved ₹{pricing.discountAmount.toLocaleString("en-IN")}
+                          </span>
+                        )}
+                      </div>
                       <span className="font-heading font-black text-4xl sm:text-5xl text-[#0A0A0A]">
-                        ₹{totalPrice.toLocaleString("en-IN")}
+                        ₹{pricing.finalPrice.toLocaleString("en-IN")}
                       </span>
                     </div>
                   </div>

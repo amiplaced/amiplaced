@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, Tag } from "lucide-react";
 import Link from "next/link";
+import { calculateStackPricing } from "@/utils/pricing";
 
 interface StackItem {
   id: string;
@@ -49,12 +50,12 @@ export default function StackBuilder() {
   };
 
   const selectedItems = items.filter((item) => selectedIds.includes(item.id));
-  const totalPrice = selectedItems.reduce((acc, item) => acc + item.price, 0);
+  const pricing = calculateStackPricing(selectedIds);
 
   return (
     <section id="build-stack" className="py-12 md:py-16 px-4 md:px-8 max-w-6xl mx-auto">
       {/* Eyebrow & Headline */}
-      <div className="flex flex-col items-start mb-12">
+      <div className="flex flex-col items-start mb-10">
         {/* Rotated Sticker Badge with Hover Wiggle Animation */}
         <motion.div
           initial={{ rotate: -4 }}
@@ -66,11 +67,17 @@ export default function StackBuilder() {
         </motion.div>
 
         <h2 className="font-heading font-extrabold text-4xl sm:text-6xl tracking-tight text-[#0A0A0A] uppercase mb-2">
-          BUILD YOUR JOB SEARCH STACK.
+          BUILD YOUR JOB SEARCH STACK
         </h2>
         <p className="text-sm sm:text-base text-neutral-600 font-medium">
-          Tap the ones you want. Total updates instantly.
+          Tap the ones you want. Total updates instantly with automatic bundle discounts.
         </p>
+
+        {/* Bundle Discount Callout Banner */}
+        <div className="mt-4 inline-flex items-center gap-2 bg-[#D7FF3F] text-black neo-border-sm rounded-xl px-4 py-2 text-xs sm:text-sm font-heading font-black">
+          <Tag className="w-4 h-4 stroke-[3]" />
+          <span>BUNDLE OFFER: Pick 2+ services & get up to ₹2,100 flat discount!</span>
+        </div>
       </div>
 
       {/* 3 Selectable Service Cards */}
@@ -118,9 +125,16 @@ export default function StackBuilder() {
         {/* Left Box: Selected Services List & Total */}
         <div className="md:col-span-6 lg:col-span-5 bg-white neo-border neo-shadow-lg rounded-2xl p-6 sm:p-7 flex flex-col justify-between min-h-[220px]">
           <div>
-            <span className="font-heading font-black text-xs uppercase tracking-widest text-neutral-400 block mb-4">
-              SELECTED SERVICES
-            </span>
+            <div className="flex items-center justify-between mb-4">
+              <span className="font-heading font-black text-xs uppercase tracking-widest text-neutral-400">
+                SELECTED SERVICES
+              </span>
+              {pricing.hasDiscount && (
+                <span className="neo-sticker bg-[#D7FF3F] text-black text-[10px] font-black uppercase px-2 py-0.5">
+                  BUNDLE UNLOCKED
+                </span>
+              )}
+            </div>
 
             {selectedItems.length === 0 ? (
               <p className="text-sm font-medium text-neutral-400 italic my-6">
@@ -150,12 +164,34 @@ export default function StackBuilder() {
 
           <div>
             <hr className="border-black/20 mb-4" />
+
+            {/* Subtotal & Savings breakdown if discount is applicable */}
+            {pricing.hasDiscount && (
+              <div className="space-y-1.5 mb-3 pb-3 border-b border-black/10 text-xs font-semibold">
+                <div className="flex items-center justify-between text-neutral-500 font-mono">
+                  <span>Subtotal:</span>
+                  <span className="line-through">₹{pricing.originalPrice.toLocaleString("en-IN")}</span>
+                </div>
+                <div className="flex items-center justify-between text-[#7B2FF7] font-heading font-bold">
+                  <span>Bundle Discount:</span>
+                  <span>-₹{pricing.discountAmount.toLocaleString("en-IN")} OFF</span>
+                </div>
+              </div>
+            )}
+
             <div className="flex items-baseline justify-between">
-              <span className="font-heading font-black text-xs uppercase tracking-widest text-neutral-500">
-                TOTAL
-              </span>
+              <div>
+                <span className="font-heading font-black text-xs uppercase tracking-widest text-neutral-500 block">
+                  TOTAL
+                </span>
+                {pricing.hasDiscount && (
+                  <span className="text-xs font-bold text-[#7B2FF7]">
+                    Saved ₹{pricing.discountAmount.toLocaleString("en-IN")}
+                  </span>
+                )}
+              </div>
               <span className="font-heading font-black text-3xl sm:text-4xl text-[#0A0A0A]">
-                ₹{totalPrice.toLocaleString("en-IN")}
+                ₹{pricing.finalPrice.toLocaleString("en-IN")}
               </span>
             </div>
           </div>

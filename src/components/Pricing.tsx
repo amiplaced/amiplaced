@@ -36,7 +36,7 @@ export default function Pricing() {
       title: "LinkedIn Glow-Up",
       subtitle: "Not another 'optimization'.",
       price: "₹3,200",
-      time: "2–3 working days",
+      time: "2-3 working days",
       timeBadge: "RECRUITER READY",
       badgeBg: "bg-[#0A0A0A] text-white",
       bgColor: "bg-[#F4C430]",
@@ -59,7 +59,7 @@ export default function Pricing() {
       title: "Job Application Assistance",
       subtitle: "Application assistance. Not a placement promise.",
       price: "₹4,500",
-      time: "Ongoing 2–3 weeks",
+      time: "Ongoing 2-3 weeks",
       timeBadge: "REAL HELP",
       badgeBg: "bg-[#D7FF3F] text-black",
       bgColor: "bg-[#F2436C]",
@@ -93,7 +93,7 @@ export default function Pricing() {
 
         {/* Headline */}
         <h2 className="font-heading font-extrabold text-4xl sm:text-6xl tracking-tight text-[#0A0A0A] uppercase">
-          PICK YOUR CAREER UPGRADE.
+          PICK YOUR CAREER UPGRADE
         </h2>
       </div>
 

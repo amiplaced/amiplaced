@@ -37,13 +37,14 @@ export default function TrustBuilder() {
 
           {/* Headline */}
           <h2 className="font-heading font-extrabold text-4xl sm:text-6xl tracking-tight text-white uppercase leading-[0.98] mb-6">
-            AI CAN WRITE. <br />
-            <span className="text-[#D7FF3F]">HUMANS STILL CHECK.</span>
+            AI CAN WRITE <br />
+            <span className="text-[#D7FF3F]">HUMANS STILL CHECK</span>
           </h2>
 
           {/* Subtext */}
           <p className="text-base sm:text-lg text-neutral-300 font-medium leading-relaxed max-w-md">
-            Every resume goes through QA before delivery. Red flags become green ticks — or we send it back.
+            Every resume goes through QA before delivery. <br />
+            Red flags become green ticks, or we send it back.
           </p>
 
           {/* Decorative Neon Dot */}

@@ -20,20 +20,25 @@ export default function Problem() {
         {/* Headline */}
         <h2 className="font-heading font-black text-2xl sm:text-4xl lg:text-5xl xl:text-6xl uppercase tracking-tighter leading-[0.98] max-w-5xl mb-6">
           <span className="text-[#0A0A0A] block mb-1.5 whitespace-normal sm:whitespace-nowrap">
-            YOUR RESUME MIGHT NOT BE BAD.
+            YOUR RESUME MIGHT NOT BE BAD
           </span>
           <span className="text-[#7B2FF7] block">
             IT MIGHT JUST BE WRONG FOR THE
           </span>
           <span className="text-[#7B2FF7] block">
-            JOB.
+            JOB
           </span>
         </h2>
 
         {/* Subtitle */}
-        <p className="text-base sm:text-lg text-neutral-700 font-medium max-w-2xl leading-relaxed">
-          One student can legitimately fit multiple career paths. Their resume shouldn&apos;t pretend those jobs are identical.
-        </p>
+        <div className="text-base sm:text-lg text-neutral-700 font-medium max-w-5xl leading-relaxed space-y-1.5">
+          <p className="whitespace-normal md:whitespace-nowrap">
+            One student can legitimately fit multiple career paths. Your resume shouldn&apos;t pretend those jobs are identical.
+          </p>
+          <p className="text-sm sm:text-base text-[#7B2FF7] font-bold">
+            Over 427+ students guided by our team of 8+ career mentors and domain experts.
+          </p>
+        </div>
       </div>
 
       {/* Comparison Cards Grid */}

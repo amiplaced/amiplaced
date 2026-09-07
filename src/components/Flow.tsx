@@ -34,8 +34,8 @@ export default function Flow() {
 
         {/* Headline */}
         <h2 className="font-heading font-extrabold text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tight text-[#0A0A0A] leading-[0.98]">
-          YOU BUY. <br />
-          <span className="text-[#7B2FF7]">WE DO THE BORING PART.</span>
+          YOU BUY <br />
+          <span className="text-[#7B2FF7]">WE DO THE BORING PART</span>
         </h2>
       </div>
 

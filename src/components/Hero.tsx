@@ -2,187 +2,158 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, FileText, CheckCircle2, Sparkles, TrendingUp } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export default function Hero() {
-  const [activeCard, setActiveCard] = useState<"analyst" | "consulting" | "ops">("consulting");
-
   return (
-    <section className="relative pt-32 pb-8 md:pt-40 md:pb-10 px-4 md:px-8 max-w-7xl mx-auto overflow-hidden">
+    <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 lg:pb-28 px-4 md:px-8 max-w-7xl mx-auto overflow-hidden">
       {/* Background Soft Purple Glow */}
       <div className="absolute top-10 left-0 w-96 h-96 bg-[#7B2FF7]/10 rounded-full blur-3xl -z-10 pointer-events-none" />
-      <div className="absolute top-20 right-0 w-96 h-96 bg-[#D7FF3F]/20 rounded-full blur-3xl -z-10 pointer-events-none" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-6 items-center">
         {/* Left Column: Copy & CTAs */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="lg:col-span-7 flex flex-col items-start"
+          className="lg:col-span-8 flex flex-col items-start text-left"
         >
-          {/* Eyebrow Tag with Hover Wiggle */}
+          {/* Eyebrow Sticker Badge */}
           <motion.div
-            initial={{ rotate: -4 }}
-            whileHover={{ rotate: [-4, 2, -6, 0], scale: 1.05 }}
+            initial={{ rotate: -3 }}
+            whileHover={{ rotate: [-3, 2, -5, 0], scale: 1.05 }}
             transition={{ duration: 0.4 }}
-            className="neo-sticker bg-[#D7FF3F] text-[#0A0A0A] font-heading font-black mb-6 cursor-pointer select-none"
+            className="neo-sticker bg-[#D7FF3F] text-[#0A0A0A] font-heading font-black text-xs sm:text-sm px-3.5 py-1.5 mb-6 cursor-pointer select-none -rotate-2"
           >
             BUILT FOR INDIAN STUDENTS
           </motion.div>
 
-          {/* Headline */}
-          <h1 className="font-heading font-black text-3xl sm:text-5xl lg:text-6xl leading-[0.98] tracking-tighter text-[#0A0A0A] uppercase mb-6">
-            STOP SENDING <br className="hidden sm:inline" />
-            THE SAME RESUME <br className="hidden sm:inline" />
-            <span className="relative inline-block">
-              EVERYWHERE.
-              <span className="absolute left-0 bottom-1 w-full h-3 bg-[#D7FF3F] -z-10 transform -rotate-1"></span>
-            </span>
+          {/* Large Clean Headline */}
+          <h1 className="font-heading font-black text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] xl:text-[5.5rem] leading-[0.92] tracking-tighter text-[#0A0A0A] uppercase mb-6">
+            STOP SENDING <br />
+            THE <br />
+            SAME RESUME <br />
+            EVERYWHERE
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg sm:text-xl text-[#333333] font-medium max-w-xl mb-8 leading-relaxed">
-            Get <strong className="text-[#0A0A0A] font-bold underline decoration-[#7B2FF7] decoration-2">job-specific resumes</strong>, a recruiter-ready LinkedIn profile, and actual help applying for opportunities.
+          <p className="text-base sm:text-lg lg:text-xl text-[#333333] font-medium max-w-2xl mb-8 leading-relaxed">
+            Get <strong className="text-[#0A0A0A] font-bold">job-specific resumes</strong>, a recruiter-ready LinkedIn profile, and actual help applying for opportunities.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto mb-6">
+          <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto mb-4">
             <Link
               href="/checkout?plan=resume"
-              className="neo-btn-primary rounded-xl px-7 py-4 font-heading font-extrabold text-sm sm:text-base uppercase tracking-wider flex items-center justify-center gap-2.5 w-full sm:w-auto"
+              className="bg-[#0A0A0A] text-[#D7FF3F] neo-border neo-shadow-lg rounded-2xl py-4 px-7 font-heading font-extrabold text-sm sm:text-base uppercase tracking-wider flex items-center justify-center gap-2.5 w-full sm:w-auto hover:translate-x-[-2px] hover:translate-y-[-2px] active:translate-x-[1px] active:translate-y-[1px] transition-all cursor-pointer"
             >
-              Fix My Career Profile
+              <span>Fix My Career Profile</span>
               <ArrowRight className="w-5 h-5" />
             </Link>
 
             <a
               href="#why-us"
-              className="neo-btn-secondary rounded-xl px-7 py-4 font-heading font-extrabold text-sm sm:text-base uppercase tracking-wider text-center w-full sm:w-auto"
+              className="bg-white text-black neo-border neo-shadow-lg rounded-2xl py-4 px-7 font-heading font-extrabold text-sm sm:text-base tracking-wide flex items-center justify-center w-full sm:w-auto hover:bg-neutral-50 hover:translate-x-[-2px] hover:translate-y-[-2px] active:translate-x-[1px] active:translate-y-[1px] transition-all cursor-pointer"
             >
               See How It Works
             </a>
           </div>
 
-          {/* Footer note */}
-          <p className="text-xs sm:text-sm text-neutral-600 font-medium flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#7B2FF7]" />
+          {/* Footer Micro-text */}
+          <p className="text-xs sm:text-sm text-neutral-500 font-semibold mt-2">
             Built for students. Not HR departments.
           </p>
         </motion.div>
 
-        {/* Right Column: Neubrutalist Visual Graphic Stack */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="lg:col-span-5 flex flex-col items-center justify-center relative"
-        >
-          {/* Main Resume Card Frame */}
-          <div className="w-full max-w-sm bg-white neo-border neo-shadow-lg rounded-2xl p-6 relative z-10">
-            {/* Top PDF Mock Header */}
-            <div className="bg-neutral-100 neo-border-sm rounded-xl p-3 mb-4 flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <FileText className="w-5 h-5 text-[#7B2FF7]" />
-                <span className="font-mono text-xs font-bold text-neutral-800 truncate max-w-[170px]">
-                  Resume_Final_Final.pdf
-                </span>
-              </div>
-              <span className="text-[10px] font-bold bg-[#D7FF3F] text-black px-2 py-0.5 rounded border border-black">
-                READY
+        {/* Right Column: Neubrutalist Animated Fanning Cards Graphic Stack */}
+        <div className="lg:col-span-4 flex justify-center items-center relative min-h-[440px] sm:min-h-[490px] pt-4 select-none">
+          {/* Main White Resume Card (Exact Reference PDF Base) */}
+          <motion.div
+            initial={{ opacity: 0, y: 40, scale: 0.85 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="w-48 sm:w-56 h-72 sm:h-80 bg-white border-[3px] border-black shadow-[6px_6px_0px_0px_#000] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-start relative z-10 -translate-y-24 select-none"
+          >
+            {/* Top Mock PDF Header & Resume Lines */}
+            <div className="w-full space-y-2 mb-4">
+              <div className="h-3 bg-black rounded-full w-3/4 mb-3" />
+              <div className="h-2 bg-neutral-400 rounded-full w-3/5" />
+              <div className="h-2 bg-neutral-300 rounded-full w-full" />
+              <div className="h-2 bg-neutral-300 rounded-full w-4/5" />
+              <div className="h-2 bg-neutral-300 rounded-full w-full" />
+              <div className="h-2 bg-neutral-300 rounded-full w-2/3" />
+            </div>
+
+            {/* Centered PDF File Name Label */}
+            <div className="text-center mt-1">
+              <span className="font-sans text-xs sm:text-sm font-bold text-[#0A0A0A] tracking-tight">
+                Resume_Final_Final.pdf
               </span>
             </div>
-
-            {/* Skeleton Content lines */}
-            <div className="space-y-2 mb-6 opacity-60">
-              <div className="h-3 bg-neutral-300 rounded w-3/4" />
-              <div className="h-2.5 bg-neutral-200 rounded w-full" />
-              <div className="h-2.5 bg-neutral-200 rounded w-5/6" />
-            </div>
-
-            {/* Clickable Interactive Cards Stack */}
-            <div className="relative space-y-3 pt-2">
-              {/* Business Analyst Card */}
-              <motion.div
-                whileHover={{ scale: 1.02, rotate: -1 }}
-                onClick={() => setActiveCard("analyst")}
-                className={`cursor-pointer bg-[#1E4FE0] text-white p-4 rounded-xl neo-border transition-all ${
-                  activeCard === "analyst" ? "neo-shadow-lg ring-2 ring-black" : "opacity-90"
-                }`}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="font-heading font-black text-xs uppercase tracking-widest text-blue-100">
-                    BUSINESS ANALYST
-                  </span>
-                  <CheckCircle2 className="w-4 h-4 text-[#D7FF3F]" />
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded">Excel</span>
-                  <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded">SQL</span>
-                  <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded">Dashboard</span>
-                </div>
-              </motion.div>
-
-              {/* Consulting Card */}
-              <motion.div
-                whileHover={{ scale: 1.02, rotate: 1 }}
-                onClick={() => setActiveCard("consulting")}
-                className={`cursor-pointer bg-[#F2436C] text-white p-4 rounded-xl neo-border transition-all ${
-                  activeCard === "consulting" ? "neo-shadow-lg ring-2 ring-black" : "opacity-90"
-                }`}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="font-heading font-black text-xs uppercase tracking-widest text-pink-100">
-                    CONSULTING
-                  </span>
-                  <Sparkles className="w-4 h-4 text-[#D7FF3F]" />
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded">Strategy</span>
-                  <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded">Research</span>
-                  <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded">Slides</span>
-                </div>
-              </motion.div>
-
-              {/* Operations Card */}
-              <motion.div
-                whileHover={{ scale: 1.02, rotate: -2 }}
-                onClick={() => setActiveCard("ops")}
-                className={`cursor-pointer bg-[#F4C430] text-[#0A0A0A] p-4 rounded-xl neo-border transition-all ${
-                  activeCard === "ops" ? "neo-shadow-lg ring-2 ring-black" : "opacity-90"
-                }`}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="font-heading font-black text-xs uppercase tracking-widest text-black">
-                    OPERATIONS
-                  </span>
-                  <TrendingUp className="w-4 h-4 text-black" />
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  <span className="bg-black/10 text-black text-[10px] font-bold px-2 py-0.5 rounded">Vendors</span>
-                  <span className="bg-black/10 text-black text-[10px] font-bold px-2 py-0.5 rounded">Coordination</span>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-
-          {/* Quote Box Badge Centered Below Main Card with Equal Top/Bottom Spacing */}
-          <motion.div
-            initial={{ rotate: 1 }}
-            whileHover={{ scale: 1.05 }}
-            animate={{ rotate: [1, -1, 1] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-            className="mt-6 bg-[#D7FF3F] text-[#0A0A0A] p-4 neo-border neo-shadow-sm rounded-xl w-full max-w-[240px] text-center z-20 cursor-pointer select-none"
-          >
-            <p className="font-heading font-extrabold text-xs italic leading-tight">
-              &ldquo;Different jobs need different resumes?&rdquo;
-            </p>
-            <p className="font-heading font-black text-xs text-[#7B2FF7] mt-1.5 underline">
-              Yes. Finally.
-            </p>
           </motion.div>
-        </motion.div>
+
+          {/* 1. BLUE CARD - BUSINESS ANALYST */}
+          <motion.div
+            initial={{ opacity: 0, x: 0, y: -60, rotate: 0, scale: 0.6 }}
+            animate={{ opacity: 1, x: -70, y: 110, rotate: -11, scale: 1 }}
+            whileHover={{ scale: 1.08, zIndex: 40 }}
+            transition={{ duration: 0.7, delay: 0.35, type: "spring", stiffness: 150, damping: 16 }}
+            className="absolute w-40 sm:w-44 h-56 sm:h-64 bg-[#0066FF] text-white border-[3px] border-black shadow-[6px_6px_0px_0px_#000] rounded-2xl p-4 z-20 cursor-pointer"
+          >
+            <div className="font-heading font-black text-xs sm:text-sm uppercase tracking-wider text-white mb-4 leading-tight">
+              BUSINESS ANALYST
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-1.5">
+                <span className="bg-[#0047BA] text-white text-[10px] font-extrabold px-2.5 py-1 rounded-lg">Excel</span>
+                <span className="bg-[#0047BA] text-white text-[10px] font-extrabold px-2.5 py-1 rounded-lg">SQL</span>
+              </div>
+              <div>
+                <span className="bg-[#0047BA] text-white text-[10px] font-extrabold px-2.5 py-1 rounded-lg">Dashboard</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* 2. YELLOW CARD - OPERATIONS */}
+          <motion.div
+            initial={{ opacity: 0, x: 0, y: -60, rotate: 0, scale: 0.6 }}
+            animate={{ opacity: 1, x: -5, y: 145, rotate: 1, scale: 1 }}
+            whileHover={{ scale: 1.08, zIndex: 40 }}
+            transition={{ duration: 0.7, delay: 0.5, type: "spring", stiffness: 150, damping: 16 }}
+            className="absolute w-40 sm:w-44 h-56 sm:h-64 bg-[#FFD600] text-[#0A0A0A] border-[3px] border-black shadow-[6px_6px_0px_0px_#000] rounded-2xl p-4 z-25 cursor-pointer"
+          >
+            <div className="font-heading font-black text-xs sm:text-sm uppercase tracking-wider text-black mb-4 leading-tight">
+              OPERATIONS
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <span className="bg-black/15 text-[#0A0A0A] text-[10px] font-extrabold px-2.5 py-1 rounded-lg">Vendors</span>
+              <span className="bg-black/15 text-[#0A0A0A] text-[10px] font-extrabold px-2.5 py-1 rounded-lg">Coordination</span>
+            </div>
+          </motion.div>
+
+          {/* 3. PINK CARD - CONSULTING */}
+          <motion.div
+            initial={{ opacity: 0, x: 0, y: -60, rotate: 0, scale: 0.6 }}
+            animate={{ opacity: 1, x: 65, y: 120, rotate: 9, scale: 1 }}
+            whileHover={{ scale: 1.08, zIndex: 40 }}
+            transition={{ duration: 0.7, delay: 0.65, type: "spring", stiffness: 150, damping: 16 }}
+            className="absolute w-44 sm:w-48 h-56 sm:h-64 bg-[#F2436C] text-white border-[3px] border-black shadow-[6px_6px_0px_0px_#000] rounded-2xl p-4 z-30 cursor-pointer"
+          >
+            <div className="font-heading font-black text-xs sm:text-sm uppercase tracking-wider text-white mb-4 leading-tight">
+              CONSULTING
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-1.5">
+                <span className="bg-black/20 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-lg">Strategy</span>
+                <span className="bg-black/20 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-lg">Research</span>
+              </div>
+              <div>
+                <span className="bg-black/20 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-lg">Slides</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

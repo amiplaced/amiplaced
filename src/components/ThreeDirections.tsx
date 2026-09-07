@@ -50,13 +50,13 @@ export default function ThreeDirections() {
 
         {/* Headline */}
         <h2 className="font-heading font-extrabold text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tight text-[#0A0A0A] leading-[0.98] mb-4">
-          ONE PERSON. <br />
-          <span className="text-[#7B2FF7]">THREE DIRECTIONS.</span>
+          ONE PERSON <br />
+          <span className="text-[#7B2FF7]">THREE DIRECTIONS</span>
         </h2>
 
         {/* Subtitle */}
         <p className="text-base sm:text-lg text-neutral-600 font-medium max-w-2xl leading-relaxed">
-          Meet Aarav. BBA student. Curious about Business Analyst, Operations, and Consulting roles. Facts stay the same — only the emphasis changes.
+          Meet Aarav. BBA student. Curious about Business Analyst, Operations, and Consulting roles. Facts stay the same, only the emphasis changes.
         </p>
       </div>
 

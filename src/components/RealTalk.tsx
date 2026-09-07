@@ -60,7 +60,7 @@ export default function RealTalk() {
 
         {/* Bottom Headline */}
         <h3 className="font-heading font-black text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight uppercase mt-6 mb-3">
-          RELEVANT &gt; RANDOM.
+          RELEVANT &gt; RANDOM
         </h3>
 
         {/* Sub-caption */}

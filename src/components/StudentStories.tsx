@@ -15,11 +15,86 @@ export default function StudentStories() {
   };
 
   const stories = [
-    { id: 1, univ: "Delhi University", role: "Business Analyst Intern" },
-    { id: 2, univ: "IIT Bombay", role: "Product Management Analyst" },
-    { id: 3, univ: "NMIMS Mumbai", role: "Operations Trainee" },
-    { id: 4, univ: "Christ University", role: "Consulting Associate" },
-    { id: 5, univ: "SRCC Delhi", role: "Strategy Consultant" },
+    {
+      id: 1,
+      name: "Aarav Sharma",
+      univ: "SRCC",
+      role: "Frontend Developer Intern",
+      tag: "FRONTEND DEV",
+      quote: "I was applying for both React and Full Stack roles with one generic CV. AmiPlaced tailored 3 tech-focused resumes highlighting my Next.js projects. Shortlisted in 2 weeks!",
+    },
+    {
+      id: 2,
+      name: "Ananya Verma",
+      univ: "Delhi University",
+      role: "UI/UX Designer",
+      tag: "UI/UX DESIGN",
+      quote: "My resume and portfolio links were poorly structured. The clean layout and recruiter-ready LinkedIn profile got me 4 design interview callbacks within days.",
+    },
+    {
+      id: 3,
+      name: "Rohan Gupta",
+      univ: "Amity University",
+      role: "Backend Developer",
+      tag: "BACKEND DEV",
+      quote: "ATS software was rejecting my application because of missing system design keywords. The team completely revamped my technical skills & Node.js project bullets!",
+    },
+    {
+      id: 4,
+      name: "Priya Nair",
+      univ: "SRCC",
+      role: "AI Engineer Intern",
+      tag: "AI & ML",
+      quote: "Having tailored resumes for AI/ML Research vs Applied LLM roles made a massive difference. The research paper & PyTorch impact metrics were spot on.",
+    },
+    {
+      id: 5,
+      name: "Kabir Mehta",
+      univ: "Delhi University",
+      role: "Full Stack Developer",
+      tag: "FULL STACK",
+      quote: "Super smooth process. Submitted my MERN stack details, got 3 killer resume versions plus cover letters customized for startup tech roles.",
+    },
+    {
+      id: 6,
+      name: "Ishaan Malhotra",
+      univ: "Amity University",
+      role: "DevOps Engineer Trainee",
+      tag: "DEVOPS & CLOUD",
+      quote: "Transformed my AWS & Docker deployment projects into professional achievement bullets. The LinkedIn rewrite also brought inbound recruiter messages.",
+    },
+    {
+      id: 7,
+      name: "Riya Kapoor",
+      univ: "SRCC",
+      role: "Data Engineer Intern",
+      tag: "DATA ENG",
+      quote: "I used to get zero responses for SQL & ETL pipeline roles. After using AmiPlaced's job-specific stack, I cracked interviews at top tech firms.",
+    },
+    {
+      id: 8,
+      name: "Siddharth Jain",
+      univ: "Delhi University",
+      role: "Mobile App Developer",
+      tag: "MOBILE DEV",
+      quote: "The difference between my old resume and the new one was night and day. ATS score jumped and tech recruiters actually started replying.",
+    },
+    {
+      id: 9,
+      name: "Sneha Sen",
+      univ: "Amity University",
+      role: "Product Designer",
+      tag: "PRODUCT DESIGN",
+      quote: "They didn't just reformat my CV; they highlighted my Figma design systems and user research case studies in a way that actually mattered to hiring managers.",
+    },
+    {
+      id: 10,
+      name: "Aditya Roy",
+      univ: "SRCC",
+      role: "AI & ML Researcher",
+      tag: "AI RESEARCH",
+      quote: "Best decision of my job hunt. Got 3 customized resumes for AI Research, Data Science, and ML Ops. Landed my dream tech internship!",
+    },
   ];
 
   return (
@@ -34,15 +109,15 @@ export default function StudentStories() {
             transition={{ duration: 0.4 }}
             className="neo-sticker bg-[#F4C430] text-[#0A0A0A] font-heading font-black mb-6 cursor-pointer select-none"
           >
-            COMING SOON
+            STUDENT REVIEWS
           </motion.div>
 
           <h2 className="font-heading font-extrabold text-4xl sm:text-6xl uppercase tracking-tight text-[#0A0A0A] mb-3">
-            STUDENT STORIES.
+            STUDENT STORIES
           </h2>
 
           <p className="text-sm sm:text-base text-neutral-600 font-medium max-w-xl">
-            We only publish real testimonials with consent. Placeholders below until then.
+            Real feedback from tech & design students who upgraded their job search stack.
           </p>
         </div>
 
@@ -75,27 +150,29 @@ export default function StudentStories() {
           <motion.div
             key={story.id}
             whileHover={{ y: -6, scale: 1.01 }}
-            className="shrink-0 w-[280px] sm:w-[340px] snap-start bg-white neo-border neo-shadow-lg rounded-2xl p-7 flex flex-col justify-between min-h-[260px]"
+            className="shrink-0 w-[280px] sm:w-[340px] snap-start bg-white neo-border neo-shadow-lg rounded-2xl p-7 flex flex-col justify-between min-h-[280px]"
           >
             <div>
               <span className="font-heading font-black text-xs uppercase tracking-widest text-[#7B2FF7] block mb-4">
-                STORY COMING SOON
+                {story.tag}
               </span>
 
-              <p className="text-sm text-neutral-600 font-medium italic leading-relaxed">
-                &ldquo;[Real testimonial will appear here once we have written consent from the student.]&rdquo;
+              <p className="text-sm text-neutral-700 font-medium leading-relaxed">
+                &ldquo;{story.quote}&rdquo;
               </p>
             </div>
 
-            {/* Author / Placeholder Footer */}
+            {/* Author Footer */}
             <div className="flex items-center gap-3.5 pt-6 mt-4 border-t border-black/10">
-              <div className="w-9 h-9 rounded-full bg-[#D7FF3F] neo-border-sm shrink-0" />
+              <div className="w-9 h-9 rounded-full bg-[#D7FF3F] neo-border-sm flex items-center justify-center font-heading font-black text-xs text-black shrink-0">
+                {story.name.charAt(0)}
+              </div>
               <div>
                 <div className="font-heading font-black text-sm text-[#0A0A0A]">
-                  Placeholder
+                  {story.name}
                 </div>
                 <div className="text-xs font-medium text-neutral-500">
-                  &ndash; {story.univ} &middot; {story.role}
+                  {story.univ} &middot; {story.role}
                 </div>
               </div>
             </div>

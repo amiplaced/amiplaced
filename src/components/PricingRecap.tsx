@@ -25,7 +25,7 @@ export default function PricingRecap() {
       subhead: "LINKEDIN UPGRADE",
       price: "₹3,200",
       desc: "Full profile positioning",
-      time: "2–3 working days",
+      time: "2-3 working days",
       bgColor: "bg-[#F4C430]",
       textColor: "text-[#0A0A0A]",
       subheadColor: "text-black/80",
@@ -38,7 +38,7 @@ export default function PricingRecap() {
       subhead: "APPLICATION ASSISTANCE",
       price: "₹4,500",
       desc: "Structured job application support",
-      time: "Ongoing 2–3 weeks",
+      time: "Ongoing 2-3 weeks",
       bgColor: "bg-[#F2436C]",
       textColor: "text-white",
       subheadColor: "text-pink-200",
@@ -63,7 +63,7 @@ export default function PricingRecap() {
         </motion.div>
 
         <h2 className="font-heading font-extrabold text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tight text-[#0A0A0A]">
-          SIMPLE. FLAT. NO SURPRISES.
+          SIMPLE. FLAT. NO SURPRISES
         </h2>
       </div>
 
@@ -129,7 +129,7 @@ export default function PricingRecap() {
             WANT EVERYTHING?
           </h3>
           <p className="text-neutral-400 font-medium text-sm sm:text-base max-w-xl">
-            Resume + LinkedIn + Applications. Build your own combo, pay only for what you pick.
+            Resume + LinkedIn + Applications. Combine 2+ services & get up to ₹2,100 flat bundle discount!
           </p>
         </div>
 

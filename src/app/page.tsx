@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import HeroTopRightOrb from "@/components/HeroTopRightOrb";
 import Ticker from "@/components/Ticker";
 import NoAiGuarantee from "@/components/NoAiGuarantee";
 import Problem from "@/components/Problem";
@@ -19,10 +20,14 @@ import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import LeadPopupModal from "@/components/LeadPopupModal";
 
 export default function Home() {
   return (
     <main className="min-h-screen relative bg-[#F4F3ED] text-[#0A0A0A] font-sans overflow-x-hidden">
+      {/* Hero Top-Right Neon Lime Ambient Glow (Absolute, scrolls with Hero) */}
+      <HeroTopRightOrb />
+
       {/* 1. Top Floating Pill Header */}
       <Navbar />
 
@@ -88,6 +93,9 @@ export default function Home() {
 
       {/* Floating Bottom-Right WhatsApp CTA (Only floating badge) */}
       <FloatingWhatsApp />
+
+      {/* Auto-Trigger Lead Generation Modal Popup (Free 5-Point Checklist) */}
+      <LeadPopupModal />
     </main>
   );
 }

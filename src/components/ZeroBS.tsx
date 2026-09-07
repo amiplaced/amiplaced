@@ -59,7 +59,7 @@ export default function ZeroBS() {
         </motion.div>
 
         <h2 className="font-heading font-extrabold text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tight text-[#0A0A0A]">
-          ZERO CAREER GURU NONSENSE.
+          ZERO CAREER GURU NONSENSE
         </h2>
       </div>
 
